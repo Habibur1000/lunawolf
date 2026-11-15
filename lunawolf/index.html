@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LunaWolf - Outpost Commander</title>
+  <meta name="description" content="An educational game where students run a lunar or Martian outpost and balance life support, radiation shielding, power and food.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%90%BA%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="wrap">
+    <h1>🐺 LunaWolf: Outpost Commander</h1>
+    <div class="sub">Keep your crew alive for 30 days. Every choice has a trade-off.</div>
+
+    <div class="top">
+      <span class="badge" id="place"></span>
+      <span class="badge" id="day"></span>
+      <span class="badge" id="ap"></span>
+    </div>
+
+    <div id="bars"></div>
+
+    <div class="info">
+      <span id="mat"></span>
+      <span id="pan"></span>
+      <span id="phase"></span>
+    </div>
+
+    <div class="forecast" id="forecast"></div>
+
+    <div class="actions" id="actions"></div>
+    <button class="main" id="endDay">End Day ➜</button>
+    <button class="ghost" id="howto">How to play</button>
+
+    <div id="log" aria-live="polite"></div>
+
+    <div class="foot">
+      Educational game built for the NASA Space Apps Challenge 2026 (team lunaWolf).
+      Code written with AI assistance (Claude). Not affiliated with or endorsed by NASA.
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay"><div class="card" id="card"></div></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/ui.js"></script>
+</body>
+</html>

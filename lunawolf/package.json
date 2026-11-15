@@ -1,0 +1,10 @@
+{
+  "name": "lunawolf-outpost-commander",
+  "version": "1.0.0",
+  "description": "Educational outpost management game for the NASA Space Apps Challenge 2026",
+  "scripts": {
+    "test": "node tests/run-tests.js",
+    "simulate": "node tests/simulate.js 1000"
+  },
+  "license": "MIT"
+}
