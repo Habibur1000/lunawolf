@@ -46,6 +46,52 @@ lunawolf/
 
 The rules (`game.js`) are separate from the screen code (`ui.js`), so the same logic runs in the browser and in Node for testing.
 
+## Architecture
+
+The game is a static web page with no server and no framework. Three plain JavaScript files load in order: data, then rules, then screens.
+
+```mermaid
+flowchart LR
+    data[js/data.js: numbers, actions, events, lessons] --> game[js/game.js: rules, state, score]
+    game --> ui[js/ui.js: screens and chart]
+    ui --> page[index.html and css/style.css]
+    game --> tests[tests: 17 tests and simulation]
+```
+
+| Layer | File | Responsibility |
+| --- | --- | --- |
+| Data | `js/data.js` | Constants, difficulty levels, destinations, actions, random events and lesson text. Change numbers here to tune the game. |
+| Logic | `js/game.js` | Game state, daily update, event roll, win and lose checks, forecast, score, best scores in browser storage. |
+| Interface | `js/ui.js` | Draws bars, buttons, log and forecast, the start, help and end screens, and the debrief chart on a canvas. |
+| Page | `index.html`, `css/style.css` | Layout and styling. Works on phones and desktops. |
+| Tests | `tests/` | Loads the data and logic files in Node, runs 17 checks, and simulates thousands of games with two bot players. |
+
+How one day works:
+
+```mermaid
+flowchart TD
+    A[Choose destination and difficulty] --> B[New day: 2 actions]
+    B --> C{Choose an action}
+    C --> D[Solar panel, oxygen, shield, greenhouse, mine or clean panels]
+    D --> E{Actions left?}
+    E -- Yes --> C
+    E -- No --> F[End day]
+    F --> G[Solar power added, base drain, crew uses oxygen and food, shield wears down]
+    G --> H[Random event may strike]
+    H --> I{Any bar at zero?}
+    I -- Yes --> J[Mission failed: debrief chart]
+    I -- No --> K{Day 30 reached?}
+    K -- No --> B
+    K -- Yes --> L[Mission success: debrief chart]
+```
+
+Design decisions:
+
+- **No frameworks or build step.** The page opens straight from a file or GitHub Pages, so teachers and students need nothing installed.
+- **Data separated from logic.** Educators can edit numbers and lesson text in one file without touching the rules.
+- **Logic separated from the screen.** The same rules run in Node, which makes automated testing and balance simulation possible.
+- **Seeded random numbers in tests.** Simulations are repeatable.
+
 ## Game model
 
 | Item | Value |
